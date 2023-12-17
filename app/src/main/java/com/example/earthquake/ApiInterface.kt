@@ -1,14 +1,10 @@
 package com.example.earthquake
 
-import retrofit2.Response
+import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 interface ApiInterface {
     @GET("query")
-    suspend fun getData(
-        @Query("format") format: String,
-        @Query("limit") limit: String,
-        @Query("minmagnitude") minmagnitude: String
-    ): Response<MyData>
+    fun getData(@QueryMap filter: HashMap<String, String>): Call<MyData>
 }

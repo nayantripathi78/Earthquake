@@ -1,6 +1,7 @@
 package com.example.earthquake
 
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +30,9 @@ class MyAdapter(private val context: Context, private val data: List<Feature>) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentEarthquake = data[position]
         holder.magnitude.text = formatMagnitude(currentEarthquake.properties.mag)
-        //holder.magnitude.setBackgroundColor(getMagnitudeColor(currentEarthquake.properties.mag))
+
+        val draw = holder.magnitude.background as GradientDrawable
+        draw.setColor(context.getColor(getMagnitudeColor(currentEarthquake.properties.mag)))
 
         val originalLocation = currentEarthquake.properties.place
         val locationOffset: String
@@ -96,4 +99,5 @@ class MyAdapter(private val context: Context, private val data: List<Feature>) :
         val timeFormat = SimpleDateFormat("hh:mm a")
         return timeFormat.format(dateObject)
     }
+
 }
